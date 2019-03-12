@@ -3418,6 +3418,10 @@ namespace Dapper
                 il.Emit(OpCodes.Unbox_Any, from); // stack is now [target][target][data-typed-value]
                 il.Emit(OpCodes.Call, op); // stack is now [target][target][typed-value]
             }
+            else if (to.IsAssignableFrom(from))
+            {
+                il.Emit(OpCodes.Castclass, to);
+            }
             else
             {
                 bool handled = false;
